@@ -1,0 +1,30 @@
+.in-stock-text-style {
+    background-color: #C6F6D5;
+    color: #38A169;
+    width: fit-content;
+    padding: 0 0.3em;
+}
+
+.out-of-stock-text-style {
+    background-color: #FEEBC8;
+    color: #DD6B20;
+    width: fit-content;
+    padding: 0 0.3em;
+}
+
+.wishlist-item-icon-heart {
+    margin: 0.2rem;
+    border-radius: 50%;
+    width: fit-content;
+    position: absolute;
+    top: 0.1em;
+    right: 0.001em;
+    border: none;
+    font-size: 1.5rem;
+    color: gray;
+    background: inherit;
+}
+
+.wishlist-item-icon-heart-added {
+    color: red;
+}
