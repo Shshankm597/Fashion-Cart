@@ -1,17 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url("https://kalakari.netlify.app/main.css");
 
 :root {
-  --color1: #1d1d1b;
-  --color2: #ffffff;
-  --color3: #f9ddc7;
-  --color4: #f5c196;
-  --color5: #ef9f5e;
+  --kalakari-colors-active-bg: #fff;
+  --kalakari-colors-active-txt: coral;
+  --kalakari-colors-txt: #1d1d1d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #1d1d1d;
+}
+
+h6 {
+  color: #D8D8D8;
 }
 
 .app-header {
@@ -74,20 +107,6 @@ body {
   opacity: 0.7;
   box-shadow: 0px 4px #999;
   border-radius: 0.7rem;
-}
-
-.nav-style {
-  background-color: inherit;
-}
-
-.active {
-  -webkit-text-fill-color: #ff9f00;
-}
-
-.nav-item {
-  color: white;
-  position: relative;
-  background-color: inherit;
 }
 
 .count-badge {

@@ -1,4 +1,4 @@
-import { useCart } from "../../cart-context";
+import { useCart } from "../Cart/cart-context";
 import { EmptyWishlist } from "./EmptyWishlist";
 
 export function WishList() {

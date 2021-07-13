@@ -1,4 +1,4 @@
-import { useCart } from "../../cart-context";
+import { useCart } from "./cart-context";
 import { EmptyCart } from "./EmptyCart";
 
 const getCartAmount = (items) => {

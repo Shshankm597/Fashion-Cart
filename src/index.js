@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 import { BrowserRouter as Router } from "react-router-dom";
-import { CartProvider } from "./cart-context";
-import { ProductProvider } from "./Routes/Products/productContext";
+import { CartProvider } from "./pages/Cart/cart-context";
+import { ProductProvider } from "./pages/Products/productContext";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

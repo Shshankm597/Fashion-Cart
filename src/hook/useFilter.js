@@ -1,5 +1,4 @@
-// import { data } from "../data";
-import { useProduct } from "../Routes/Products/productContext";
+import { useProduct } from "../pages/Products/productContext";
 
 export const useFilters = () => {
   const {
