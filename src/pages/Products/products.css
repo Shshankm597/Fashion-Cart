@@ -25,6 +25,10 @@
     background: inherit;
 }
 
+.wishlist-item-icon-heart:hover {
+    color: #F56565;
+}
+
 .wishlist-item-icon-heart-added {
     color: red;
 }

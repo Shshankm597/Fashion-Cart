@@ -1,4 +1,4 @@
-import { useProduct } from "../pages/Products/productContext";
+import { useProduct } from "./Context/productContext";
 
 export const useFilters = () => {
   const {
@@ -7,7 +7,6 @@ export const useFilters = () => {
     sortBy,
     productData,
   } = useProduct();
-
   const getSortedData = (data, sortBy) => {
     if (sortBy && sortBy === "PRICE_HIGH_TO_LOW")
       return data.sort((a, b) => b.price - a.price);
@@ -19,23 +18,13 @@ export const useFilters = () => {
   };
 
   function getFilteredData(data, { showFastDeliveryOnly, showInventoryAll }) {
+    console.log(data.products, "from getFilteredData data param")
     return data
       .filter(({ fastDelivery }) =>
         showFastDeliveryOnly ? fastDelivery : true
       )
       .filter(({ inStock }) => (showInventoryAll ? true : inStock));
   }
-
-// not functioning
-  // const getSearchedData = ({ products }, searchString) => {
-  //   return products.filter((item) =>
-  //     item.name.toLowerCase().includes(searchString.toLowerCase())
-  //   );
-  // };
-  // function searchedData(searchString) {
-  //   getSearchedData(filteredData, searchString);
-  // }
-  // console.log(searchedData);
 
   const sortedData = getSortedData(productData, sortBy);
   const filteredData = getFilteredData(sortedData, {

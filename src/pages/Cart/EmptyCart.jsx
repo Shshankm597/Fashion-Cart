@@ -1,15 +1,11 @@
+import emptyCart from "../../images/empty_cart.svg";
+
 export function EmptyCart() {
   return (
     <div className="empty-cart-wishlist">
-      <img
-        src="images/empty_cart.svg"
-        alt="Empty Cart"
-        width="100%"
-        height="auto"
-        style={{ maxWidth: "300px" }}
-      />
+      <img className="empty-cart-wishlist-image" src={emptyCart} alt="empty_cart" />
       <p> Your cart is empty! </p>
-      <small> It's a good day to buy something! </small>
+      <medium> It's a good day to buy something! </medium>
     </div>
   );
 }

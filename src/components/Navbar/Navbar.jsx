@@ -1,19 +1,22 @@
-import { useCart } from "../../pages/Cart/cart-context";
+import { useCart } from "../../Context/cartContext";
 import { Link, NavLink } from "react-router-dom";
 import { IoBookmarkOutline, IoBagOutline } from 'react-icons/io5';
 import "./navbar.css";
 
 
 export function Navbar() {
-    const { cartItems, wishList } = useCart();
+    const { cart, wishList } = useCart();
 
     return (
         <nav className="navbar">
         <Link className="navbar-brand" to="/">Fashion-Cart</Link>
         
-        <div className="nav-item-group">            
+        <div className="nav-item-group">
             <NavLink end className="nav-item" to="/products">
               Shop
+            </NavLink>
+            <NavLink end className="nav-item" to="/login">
+            Login ✥ Register
             </NavLink>
             <NavLink className="nav-item" to="/wishlist">
               <IoBookmarkOutline size="1.5em" />
@@ -23,8 +26,8 @@ export function Navbar() {
             </NavLink>
             <NavLink className="nav-item" to="/cart">
               <IoBagOutline size="1.5em"/>
-              <span className={cartItems.length > 0 ? "count-badge" : null}>
-                {cartItems.length > 0 ? cartItems.length : null}
+              <span className={cart.length > 0 ? "count-badge" : null}>
+                {cart.length > 0 ? cart.length : null}
               </span>
             </NavLink>
         </div>

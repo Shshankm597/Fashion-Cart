@@ -4,19 +4,22 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 import { BrowserRouter as Router } from "react-router-dom";
-import { CartProvider } from "./pages/Cart/cart-context";
-import { ProductProvider } from "./pages/Products/productContext";
+import { CartProvider } from "./Context/cartContext";
+import { ProductProvider } from "./Context/productContext";
+import { AuthProvider } from "./Context/authContext";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <ProductProvider>
-    <CartProvider>
-      <Router>
-        <App />
-      </Router>
-    </CartProvider>
-    </ProductProvider>
+    <AuthProvider>
+      <ProductProvider>
+      <CartProvider>
+        <Router>
+          <App />
+        </Router>
+      </CartProvider>
+      </ProductProvider>
+    </AuthProvider>
   </StrictMode>,
   rootElement
 );

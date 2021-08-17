@@ -1,4 +1,4 @@
-import { useProduct } from "../pages/Products/productContext";
+import { useProduct } from "../../Context/productContext";
 
 export const FilterUI = () => {
     const { showInventoryAll, showFastDeliveryOnly, sortBy, productDispatch } = useProduct();

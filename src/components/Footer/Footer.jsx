@@ -4,7 +4,7 @@ import { FaTwitterSquare, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 export function Footer() {
     return (
-        <footer class="fc-footer">
+        <footer className="fc-footer">
             <p> Proudly made in <img src={ flag } alt="indian-flag" /> by Shashank Shekhar
                 Mishra</p>
 

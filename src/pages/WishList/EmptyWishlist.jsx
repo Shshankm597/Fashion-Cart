@@ -1,18 +1,11 @@
+import emptyWishlist from "../../images/Wishlist.svg";
+
 export function EmptyWishlist() {
   return (
     <div className="empty-cart-wishlist">
-      <img
-        src="images/Wishlist.svg"
-        alt="Empty Cart"
-        width="100%"
-        height="auto"
-        style={{ maxWidth: "300px" }}
-      />
+      <img className="empty-cart-wishlist-image" src={emptyWishlist} alt="empty_wishllist"/>
       <p> Your wishlist is empty! </p>
-      <small>
-        {" "}
-        Explore our wide range of products and save them to buy later!{" "}
-      </small>
+      <medium> Explore our wide range of products and save them to buy later! </medium>
     </div>
   );
 }

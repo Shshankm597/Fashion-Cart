@@ -1,4 +1,4 @@
-import { useCart } from "./cart-context";
+import { useCart } from "../../Context/cartContext";
 import { EmptyCart } from "./EmptyCart";
 
 const getCartAmount = (items) => {
@@ -6,29 +6,20 @@ const getCartAmount = (items) => {
 };
 
 export function Cart() {
-  const { cartItems, cartDispatch } = useCart();
+  const { cart, cartDispatch } = useCart();
   return (
     <>
-      <h1> My Cart </h1>
-      {cartItems.length > 0 && (
-        <h2>Total cart value: {getCartAmount(cartItems)}</h2>
+      <h2> My Cart </h2>
+      {cart.length > 0 && (
+        <h2>Total cart value: {getCartAmount(cart)}</h2>
       )}
-      {cartItems.map(
-        ({
-          _id,
-          name,
-          image,
-          price,
-          productName,
-          inStock,
-          level,
-          fastDelivery,
-          qty
-        }) => {
-          if (qty >= 1) {
+      {cart.map(
+        ( cartItems ) => {
+          console.log(cartItems, "cart hai ye")
+          if (cartItems.qty >= 1) {
             return (
               <div
-                key={_id}
+                key={cartItems._id}
                 style={{
                   display: "flex",
                   flexDirection: "coloumn",
@@ -122,7 +113,7 @@ export function Cart() {
           return null; // check if doing this is not a bad practice else check for a better solution
         }
       )}
-      {cartItems.length < 1 && <EmptyCart />}
+      {cart.length < 1 && <EmptyCart />}
     </>
   );
 }

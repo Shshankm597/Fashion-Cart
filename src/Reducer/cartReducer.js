@@ -1,10 +1,10 @@
 export function cartReducer(state, { type, _id, item }) {
-  const { cartItems, wishList } = state;
+  const { cart, wishList } = state;
   switch (type) {
     case "INCREMENT_QTY":
       return {
         ...state,
-        cartItems: cartItems.map((cartItem) =>
+        cart: cart.map((cartItem) =>
           cartItem._id === _id ? { ...cartItem, qty: cartItem.qty + 1 } : cartItem
         )
       };
@@ -12,7 +12,7 @@ export function cartReducer(state, { type, _id, item }) {
     case "DECREMENT_QTY":
       return {
         ...state,
-        cartItems: cartItems.map((cartItem) =>
+        cart: cart.map((cartItem) =>
           cartItem._id === _id ? { ...cartItem, qty: cartItem.qty - 1 } : cartItem
         )
       };
@@ -20,12 +20,12 @@ export function cartReducer(state, { type, _id, item }) {
     case "REMOVE_CART_ITEM":
       return {
         ...state,
-        cartItems: cartItems.filter((cartItem) => cartItem._id !== _id)
+        cart: cart.filter((cartItem) => cartItem._id !== _id)
       };
     case "ADD_CART_ITEM":
       return {
         ...state,
-        cartItems: cartItems.concat(item)
+        cart: cart.concat(item)
       };
     case "ADD_WISHLIST_ITEM":
       return {

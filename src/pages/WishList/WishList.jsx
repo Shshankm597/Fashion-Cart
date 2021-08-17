@@ -1,11 +1,11 @@
-import { useCart } from "../Cart/cart-context";
+import { useCart } from "../../Context/cartContext";
 import { EmptyWishlist } from "./EmptyWishlist";
 
 export function WishList() {
   const { wishList, cartDispatch } = useCart();
   return (
     <>
-      <h1> My Wishlist </h1>
+      <h2> My Wishlist </h2>
       {wishList.map(
         ({
           _id,

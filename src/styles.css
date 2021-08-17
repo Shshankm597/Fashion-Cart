@@ -79,9 +79,13 @@ h6 {
   background-color: white;
   border-radius: 0 0 0.5rem 0.5rem;
   margin: 1.5rem;
-  max-width: 40%;
+  max-width: 20vw;
   padding: 0 0 1rem 0;
   position: relative;
+}
+
+.cart-card-text {
+  padding: 0 1rem;
 }
 
 .cart-card button {
@@ -90,6 +94,7 @@ h6 {
 
 .btn {
   background-color: #ff9f00;
+  box-shadow: none;
 }
 
 .btn:hover {
@@ -105,7 +110,6 @@ h6 {
   text-align: center;
   background-color: #cbd5e0;
   opacity: 0.7;
-  box-shadow: 0px 4px #999;
   border-radius: 0.7rem;
 }
 
@@ -131,14 +135,16 @@ h6 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: calc(100vh - 490px);
+  padding-bottom: 2rem;
 }
 
-.searchbox {
+.empty-cart-wishlist-image {
   width: 100%;
-  height: 2.5rem;
-  max-width: 35rem;
-  border: none;
-  box-shadow: 0 4px 8px 3px rgb(0 0 0 / 20%);
-  /* max-height: 2.5rem; */
+  height: auto;
+  max-width: 450px;
+}
+
+.empty-cart-wishlist p {
+  padding: 1rem;
+  font-size: 1.5rem;
 }

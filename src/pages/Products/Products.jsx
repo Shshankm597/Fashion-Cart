@@ -1,17 +1,18 @@
 import axios from "axios";
-import { useCart } from "../Cart/cart-context";
+import { useCart } from "../../Context/cartContext";
 import { checkItem } from "../../utils";
 import { useNavigate } from "react-router-dom";
-import { useFilters } from "../../hook/useFilter";
-import { FilterUI } from "../../components/FilterUI";
+import { useFilters } from "../../useFilter";
+import { FilterUI, Spinner } from "../../components"
 import { useEffect } from "react";
 import { API_PRODUCTS } from "../../urls";
-import { useProduct } from "./productContext";
+import { useProduct } from "../../Context/productContext";
+import { IoBookmark } from 'react-icons/io5';
 
 import "./products.css";
 
 export function Products() {
-  const { cartItems, wishList, cartDispatch } = useCart();
+  const { cart, wishList, cartDispatch } = useCart();
   const { setProductData } = useProduct();
   const { filteredData } = useFilters();
 
@@ -19,9 +20,9 @@ export function Products() {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get(API_PRODUCTS);
-      // console.log(response)
-      setProductData(response.data);
+      const { data: {products} } = await axios.get(API_PRODUCTS);
+      console.log(products, "from product fetch URL");
+      setProductData(products);
     })();
     }, []);
 
@@ -31,33 +32,24 @@ export function Products() {
       <FilterUI />
 
       <div className="page-content">
-        {filteredData.map(
-          ({
-            _id,
-            name,
-            image,
-            price,
-            productName,
-            inStock,
-            level,
-            fastDelivery
-          }) => {
+        {filteredData.length > 0 ? filteredData.map(
+          ( items ) => {
             return (
-              <div key={_id} className="cart-card">
+              <div key={items._id} className="cart-card">
                 <img
-                  src={image}
+                  src={items.imageURL}
                   width="100%"
                   height="auto"
-                  alt={productName}
+                  alt={items.name}
                   style={{
-                    maxWidth: "280px"
+                    maxWidth: "100%"
                   }}
                 />
-                <div style={{ padding: "0 1rem" }}>
-                  <h3> {name} </h3>
-                  <div>Rs. {price}</div>
-                  {fastDelivery && <div> Fast Delivery </div>}
-                  {inStock && (
+                <div className="cart-card-text">
+                  <h3> {items.name} </h3>
+                  <div>Rs. {items.price}</div>
+                  {items.fastDelivery && <div> Fast Delivery </div>}
+                  {items.inStock && (
                     <div
                       className="in-stock-text-style"
                     >
@@ -65,7 +57,7 @@ export function Products() {
                       In Stock{" "}
                     </div>
                   )}
-                  {!inStock && (
+                  {!items.inStock && (
                     <div
                       className="out-of-stock-text-style"
                     >
@@ -74,63 +66,47 @@ export function Products() {
                     </div>
                   )}
                   <button
-                    className={`${!inStock ? "btn-disabled" : "btn"}`}
-                    disabled={!inStock}
+                    className={`${!items.inStock ? "btn-disabled" : "btn"}`}
+                    disabled={!items.inStock}
                     onClick={() => {
-                      checkItem(cartItems, _id)
+                      checkItem(cart, items._id)
                         ? navigate("/cart")
                         : cartDispatch({
                             type: "ADD_CART_ITEM",
-                            item: {
-                              _id,
-                              name,
-                              price,
-                              inStock,
-                              level,
-                              fastDelivery,
-                              image,
-                              qty: 1
-                            }
+                            item: { items, qty: 1 }
                           });
                     }}
                   >
-                    {!inStock
+                    {!items.inStock
                       ? "Out of Stock"
-                      : checkItem(cartItems, _id)
+                      : checkItem(cart, items._id)
                       ? "Move to cart"
                       : "Add to cart"}
                   </button>
                   <button
-                    className={`wishlist-item-icon-heart ${checkItem(wishList, _id) && "wishlist-item-icon-heart-added"}`}
+                    className={`wishlist-item-icon-heart ${checkItem(wishList, items._id) && "wishlist-item-icon-heart-added"}`}
                     onClick={() => {
-                      checkItem(wishList, _id)
+                      checkItem(wishList, items._id)
                         ? cartDispatch({
                             type: "REMOVE_WISHLIST_ITEM",
-                            _id
+                            item: {items}
                           })
                         : cartDispatch({
                             type: "ADD_WISHLIST_ITEM",
                             item: {
-                              _id,
-                              name,
-                              price,
-                              inStock,
-                              level,
-                              fastDelivery,
-                              productName,
-                              image,
+                              items,
                               qty: 1
                             }
                           });
                     }}
                   >
-                    <i className="fa fa-heart"></i>{" "}
+                    <IoBookmark />
                   </button>
                 </div>
               </div>
             );
           }
-        )}
+        ) : <Spinner />}
       </div>
     </div>
   );
