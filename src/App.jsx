@@ -17,7 +17,7 @@ export default function App() {
   console.log(userToken,"This is user token")
 
   useEffect(() => {
-    if (!isUserLogin) {
+    if (isUserLogin) {
       (async function () {
         try {
           let tempToken = localStorage?.getItem("login");
@@ -77,10 +77,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/wishlist" element={<WishList />} />
-          <Route path="/cart" element={<Cart />} />
-          {/* <PrivateRoute path="/wishlist" element={<WishList />} />
-          <PrivateRoute path="/cart" element={<Cart />} /> */}
+          {/* <Route path="/wishlist" element={<WishList />} />
+          <Route path="/cart" element={<Cart />} /> */}
+          <PrivateRoute path="/wishlist" element={<WishList />} />
+          <PrivateRoute path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

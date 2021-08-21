@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useCart } from "../../Context/cartContext";
+import { useAuth } from "../../Context/authContext";
 import { checkItem } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useFilters } from "../../useFilter";
@@ -15,6 +16,7 @@ export function Products() {
   const { cart, wishList, cartDispatch } = useCart();
   const { setProductData } = useProduct();
   const { filteredData } = useFilters();
+  const { isUserLogin } = useAuth();
 
   const navigate = useNavigate();
 
@@ -34,6 +36,7 @@ export function Products() {
       <div className="page-content">
         {filteredData.length > 0 ? filteredData.map(
           ( items ) => {
+            console.log(items, "product page")
             return (
               <div key={items._id} className="cart-card">
                 <img
@@ -46,35 +49,33 @@ export function Products() {
                   }}
                 />
                 <div className="cart-card-text">
-                  <h3> {items.name} </h3>
+                  <h4> {items.name} </h4>
                   <div>Rs. {items.price}</div>
                   {items.fastDelivery && <div> Fast Delivery </div>}
-                  {items.inStock && (
+                  {items.inStock ? (
                     <div
                       className="in-stock-text-style"
                     >
                       {" "}
                       In Stock{" "}
                     </div>
-                  )}
-                  {!items.inStock && (
-                    <div
-                      className="out-of-stock-text-style"
-                    >
-                      {" "}
-                      Out of Stock{" "}
-                    </div>
-                  )}
+                  ) : 
+                  (<div
+                    className="out-of-stock-text-style"
+                  >
+                    {" "}
+                    Out of Stock{" "}
+                  </div>)
+                }
                   <button
-                    className={`${!items.inStock ? "btn-disabled" : "btn"}`}
+                    className={`${!items.inStock ? "btn btn-disabled" : "btn btn-cart"}`}
                     disabled={!items.inStock}
-                    onClick={() => {
-                      checkItem(cart, items._id)
-                        ? navigate("/cart")
-                        : cartDispatch({
-                            type: "ADD_CART_ITEM",
-                            item: { items, qty: 1 }
-                          });
+                    onClick={() => {{!isUserLogin ? navigate("/login") : checkItem(cart, items._id)
+                    ? navigate("/cart")
+                    : cartDispatch({
+                        type: "ADD_CART_ITEM",
+                        item: { ...items, qty: 1 }
+                      }) }
                     }}
                   >
                     {!items.inStock
@@ -83,22 +84,21 @@ export function Products() {
                       ? "Move to cart"
                       : "Add to cart"}
                   </button>
+
+
                   <button
                     className={`wishlist-item-icon-heart ${checkItem(wishList, items._id) && "wishlist-item-icon-heart-added"}`}
-                    onClick={() => {
-                      checkItem(wishList, items._id)
-                        ? cartDispatch({
-                            type: "REMOVE_WISHLIST_ITEM",
-                            item: {items}
-                          })
-                        : cartDispatch({
-                            type: "ADD_WISHLIST_ITEM",
-                            item: {
-                              items,
-                              qty: 1
-                            }
-                          });
-                    }}
+                    onClick={() => {{!isUserLogin ? navigate("/login") : 
+                    checkItem(wishList, items._id)
+                    ? cartDispatch({
+                        type: "REMOVE_WISHLIST_ITEM",
+                        item: {items}
+                      })
+                    : cartDispatch({
+                        type: "ADD_WISHLIST_ITEM",
+                        item: { ...items, qty: 1 }
+                      });
+                    }} }
                   >
                     <IoBookmark />
                   </button>

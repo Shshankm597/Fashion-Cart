@@ -1,11 +1,14 @@
 import { useCart } from "../../Context/cartContext";
-import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../../Context/authContext";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoBookmarkOutline, IoBagOutline } from 'react-icons/io5';
 import "./navbar.css";
 
 
 export function Navbar() {
     const { cart, wishList } = useCart();
+    const { isUserLogin, logoutManager } = useAuth();
+    const navigate = useNavigate();
 
     return (
         <nav className="navbar">
@@ -14,9 +17,6 @@ export function Navbar() {
         <div className="nav-item-group">
             <NavLink end className="nav-item" to="/products">
               Shop
-            </NavLink>
-            <NavLink end className="nav-item" to="/login">
-            Login ✥ Register
             </NavLink>
             <NavLink className="nav-item" to="/wishlist">
               <IoBookmarkOutline size="1.5em" />
@@ -30,6 +30,19 @@ export function Navbar() {
                 {cart.length > 0 ? cart.length : null}
               </span>
             </NavLink>
+            {!isUserLogin && (
+            <NavLink end className="nav-item" to="/login">
+            Login ✥ Register
+            </NavLink>
+            )}
+            {isUserLogin && (
+              <button
+              onClick={() => logoutManager(navigate)}
+              className="btn nav-item"
+            >
+              Logout
+            </button>
+            )}
         </div>
       </nav>
     )

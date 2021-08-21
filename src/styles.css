@@ -72,45 +72,7 @@ h6 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.cart-card {
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-  background-color: white;
-  border-radius: 0 0 0.5rem 0.5rem;
-  margin: 1.5rem;
-  max-width: 20vw;
-  padding: 0 0 1rem 0;
-  position: relative;
-}
-
-.cart-card-text {
-  padding: 0 1rem;
-}
-
-.cart-card button {
-  margin-top: 0.8rem;
-}
-
-.btn {
-  background-color: #ff9f00;
-  box-shadow: none;
-}
-
-.btn:hover {
-  background-color: #fb641b;
-}
-
-.btn-disabled {
-  color: inherit;
-  border: none;
-  padding: 0.4em 0.7em;
-  font-size: var(--font-size-md);
-  width: fit-content;
-  text-align: center;
-  background-color: #cbd5e0;
-  opacity: 0.7;
-  border-radius: 0.7rem;
+  margin: 2rem 0;
 }
 
 .count-badge {
@@ -121,12 +83,11 @@ h6 {
   background-color: #ff6161;
   border-radius: 0.3rem;
   font-size: 0.7rem;
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid white;
+  padding: 0.1rem 0.3rem;
+  /* border: 1px solid white; */
   color: white;
-  top: -0.6rem;
-  right: -0.6rem;
+  bottom: 1.5rem;
+  left: 2rem;
   -webkit-text-fill-color: white;
 }
 

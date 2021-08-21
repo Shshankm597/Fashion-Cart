@@ -64,7 +64,7 @@ export function AuthProvider({ children }) {
           },
         }
       );
-
+console.log(data, "data from login")
       if (data.success) {
         setLocalStorage(data);
       }

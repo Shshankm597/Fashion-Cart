@@ -2,11 +2,14 @@ import { useCart } from "../../Context/cartContext";
 import { EmptyCart } from "./EmptyCart";
 
 const getCartAmount = (items) => {
+  console.log(items, "getCartAmount from cart")
   return items.reduce((total, { price, qty }) => total + price * qty, 0);
 };
 
 export function Cart() {
   const { cart, cartDispatch } = useCart();
+  console.log(cart, "cart hai ye")
+
   return (
     <>
       <h2> My Cart </h2>
@@ -14,12 +17,12 @@ export function Cart() {
         <h2>Total cart value: {getCartAmount(cart)}</h2>
       )}
       {cart.map(
-        ( cartItems ) => {
-          console.log(cartItems, "cart hai ye")
-          if (cartItems.qty >= 1) {
+        ( items ) => {
+          console.log(items, "item aya")
+          if (items.qty >= 1) {
             return (
               <div
-                key={cartItems._id}
+                key={items._id}
                 style={{
                   display: "flex",
                   flexDirection: "coloumn",
@@ -33,10 +36,10 @@ export function Cart() {
               >
                 <img
                   className="img"
-                  src={image}
+                  src={items.imageURL}
                   width="100%"
                   height="auto"
-                  alt={productName}
+                  alt={items.name}
                   style={{
                     maxWidth: "250px"
                   }}
@@ -57,19 +60,18 @@ export function Cart() {
                   onClick={() =>
                     cartDispatch({
                       type: "REMOVE_CART_ITEM",
-                      _id
+                      _id: (items._id)
                     })
                   }
                 >
                   <i className="fa fa-times"></i>
                 </button>
                 <div>
-                  <h3> {name} </h3>
-                  <div>Rs. {price}</div>
-                  {inStock && <div> In Stock </div>}
-                  {!inStock && <div> Out of Stock </div>}
-                  <div>{level}</div>
-                  {fastDelivery ? (
+                  <h3> {items.name} </h3>
+                  <div>Rs. {items.price}</div>
+                  {items.inStock && <div> In Stock </div>}
+                  {!items.inStock && <div> Out of Stock </div>}
+                  {items.fastDelivery ? (
                     <div> Fast Delivery </div>
                   ) : (
                     <div> 3 days minimum </div>
@@ -78,13 +80,13 @@ export function Cart() {
                     <button
                       style={{ width: "fit-content", margin: "0 0.3rem" }}
                       onClick={() => {
-                        qty > 1 ?
+                        items.qty > 1 ?
                         cartDispatch({
                           type: "DECREMENT_QTY",
-                          _id
+                          _id: (items._id)
                         }) : cartDispatch({
                           type: "REMOVE_CART_ITEM",
-                          _id
+                          _id: (items._id)
                         })
                       }
                       }
@@ -92,13 +94,13 @@ export function Cart() {
                       {" "}
                       -{" "}
                     </button>
-                    {qty}
+                    {items.qty}
                     <button
                       style={{ width: "fit-content", margin: "0 0.3rem" }}
                       onClick={() =>
                         cartDispatch({
                           type: "INCREMENT_QTY",
-                          _id
+                          _id: (items._id)
                         })
                       }
                     >

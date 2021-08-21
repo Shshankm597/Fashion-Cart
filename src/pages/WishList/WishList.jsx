@@ -7,20 +7,10 @@ export function WishList() {
     <>
       <h2> My Wishlist </h2>
       {wishList.map(
-        ({
-          _id,
-          name,
-          price,
-          inStock,
-          level,
-          fastDelivery,
-          productName,
-          image,
-          qty
-        }) => {
+        (items) => {
           return (
             <div
-              key={_id}
+              key={items._id}
               style={{
                 display: "flex",
                 flexDirection: "coloumn",
@@ -34,10 +24,10 @@ export function WishList() {
             >
               <img
                 className="img"
-                src={image}
+                src={items.imageURL}
                 width="100%"
                 height="auto"
-                alt={productName}
+                alt={items.name}
                 style={{
                   maxWidth: "250px"
                 }}
@@ -56,35 +46,26 @@ export function WishList() {
                 onClick={() =>
                   cartDispatch({
                     type: "REMOVE_WISHLIST_ITEM",
-                    _id
+                    _id: (items._id)
                   })
                 }
               >
                 <i className="fa fa-times"></i>
               </button>
               <div>
-                <h3> {name} </h3>
-                <p> Rs. {price} </p>
+                <h3> {items.name} </h3>
+                <p> Rs. {items.price} </p>
                 <button
                   style={{ margin: "0.2rem" }}
                   className="btn btn-primary"
                   onClick={() => {
                     cartDispatch({
                       type: "ADD_CART_ITEM",
-                      item: {
-                        _id,
-                        name,
-                        price,
-                        inStock,
-                        level,
-                        fastDelivery,
-                        image,
-                        qty
-                      }
-                    });
+                      item: { ...items, qty: 1 }
+                    })
                     cartDispatch({
                       type: "REMOVE_WISHLIST_ITEM",
-                      _id
+                      _id: (items._id)
                     });
                   }}
                 >
